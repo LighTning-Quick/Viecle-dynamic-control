@@ -120,12 +120,12 @@ switch flag,
   %%%%%%%%%%%%%%%%%%
   case 0,
 
-[sys,x0,str,ts,simStateCompliance]=mdlInitializeSizes(A,B,C);
+[sys,x0,str,ts]=mdlInitializeSizes(A,B,C);
   %%%%%%%%%%%%%%%
   % Derivatives %
   %%%%%%%%%%%%%%%
   case 1,
-    sys=mdlDerivatives(t,x,u);
+    sys=mdlDerivatives(t,x,u,A,B,C);
 
   %%%%%%%%%%
   % Update %
@@ -137,7 +137,7 @@ switch flag,
   % Outputs %
   %%%%%%%%%%%
   case 3,
-    sys=mdlOutputs(t,x,u,A,B,C);
+    sys=mdlOutputs(t,x,u);
 
   %%%%%%%%%%%%%%%%%%%%%%%
   % GetTimeOfNextVarHit %
@@ -167,7 +167,7 @@ end
 % Return the sizes, initial conditions, and sample times for the S-function.
 %=============================================================================
 %
-function [sys,x0,str,ts,simStateCompliance]=mdlInitializeSizes
+function [sys,x0,str,ts]=mdlInitializeSizes(A,B,C)
 
 %
 % call simsizes for a sizes structure, fill it in and convert it to a
